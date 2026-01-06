@@ -1,0 +1,40 @@
+:root {
+  /* Netflix Brand Colors */
+  --netflix-red: #E50914;
+  --netflix-black: #141414;
+  --netflix-dark: #0a0a0a;
+  --netflix-gray: #2f2f2f;
+  --netflix-light-gray: #808080;
+  
+  /* Accent Colors */
+  --accent-yellow: #FFD700;
+  --accent-cyan: #00D9FF;
+  --accent-green: #46D369;
+  
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Border Radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
+  --shadow-netflix: 0 4px 20px rgba(229, 9, 20, 0.3);
+}

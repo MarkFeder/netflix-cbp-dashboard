@@ -1,0 +1,61 @@
+.project-card {
+  background: var(--netflix-gray);
+  border: 1px solid var(--netflix-light-gray);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: grab;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.project-card:hover {
+  border-color: var(--accent-cyan);
+  transform: translateX(4px);
+}
+
+.project-card:active {
+  cursor: grabbing;
+}
+
+.project-card.dragging {
+  opacity: 0.5;
+  transform: rotate(2deg);
+}
+
+.project-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  margin-top: 0.75rem;
+}
+
+.meta-tag {
+  background: var(--netflix-black);
+  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid var(--netflix-light-gray);
+}
+
+.meta-tag.genre {
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+}
+
+.meta-tag.budget {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.meta-tag.priority {
+  border-color: var(--netflix-red);
+  color: var(--netflix-red);
+}

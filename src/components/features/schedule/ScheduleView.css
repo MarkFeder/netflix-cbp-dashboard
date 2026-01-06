@@ -1,0 +1,38 @@
+.schedule-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.timeline-item {
+  background: var(--netflix-black);
+  border-left: 4px solid var(--accent-cyan);
+  padding: 1.5rem;
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.timeline-item:hover {
+  border-left-color: var(--netflix-red);
+  transform: translateX(8px);
+}
+
+.timeline-date {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  color: var(--accent-cyan);
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.timeline-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-details {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}

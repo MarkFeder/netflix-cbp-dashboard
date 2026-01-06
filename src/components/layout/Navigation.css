@@ -1,0 +1,47 @@
+.nav-tabs {
+  background: var(--netflix-black);
+  display: flex;
+  gap: 0;
+  padding: 0 2rem;
+  max-width: 1800px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.nav-tab {
+  font-family: 'IBM Plex Mono', monospace;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all var(--transition-normal);
+  border-bottom: 3px solid transparent;
+  position: relative;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nav-tab:hover {
+  color: var(--text-primary);
+  background: rgba(229, 9, 20, 0.1);
+}
+
+.nav-tab.active {
+  color: var(--netflix-red);
+  border-bottom-color: var(--netflix-red);
+}
+
+@media (max-width: 768px) {
+  .nav-tabs {
+    padding: 0 1rem;
+  }
+
+  .nav-tab {
+    padding: 1rem 1.5rem;
+    font-size: 0.75rem;
+  }
+}
