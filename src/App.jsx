@@ -49,6 +49,7 @@ function App() {
               projects={projects}
               setProjects={setProjects}
               stages={stages}
+              setActiveTab={setActiveTab}
             />
           )}
           {activeTab === 'schedule' && <ScheduleView projects={projects} />}

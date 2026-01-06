@@ -1,0 +1,43 @@
+.settings-modal {
+  padding: var(--spacing-md);
+}
+
+.settings-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.settings-section:last-child {
+  margin-bottom: 0;
+}
+
+.settings-section h3 {
+  font-size: 1rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--netflix-red);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.settings-section p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.about-info {
+  background: var(--netflix-dark);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+}
+
+.about-info p {
+  margin-bottom: var(--spacing-xs);
+}
+
+.about-info p:last-child {
+  margin-bottom: 0;
+}
+
+.about-info strong {
+  color: var(--text-primary);
+}

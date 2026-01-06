@@ -3,11 +3,15 @@ import { Card } from '@components/common/Card';
 import { Button } from '@components/common/Button';
 import { PipelineStage } from './PipelineStage';
 import { AddProjectModal } from './AddProjectModal';
+import { ReportModal } from './ReportModal';
+import { SettingsModal } from './SettingsModal';
 import { STAGE_NAMES } from '@utils/constants';
 import './PipelineView.css';
 
-export function PipelineView({ projects, setProjects, stages }) {
-  const [showModal, setShowModal] = useState(false);
+export function PipelineView({ projects, setProjects, stages, setActiveTab }) {
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [draggedProject, setDraggedProject] = useState(null);
 
   const handleDragStart = (e, project) => {
@@ -67,19 +71,19 @@ export function PipelineView({ projects, setProjects, stages }) {
         </Card>
         <Card title="Quick Actions">
           <div className="quick-actions">
-            <Button variant="action" onClick={() => setShowModal(true)}>
+            <Button variant="action" onClick={() => setShowAddModal(true)}>
               <span className="action-icon">+</span>
               New Project
             </Button>
-            <Button variant="action">
+            <Button variant="action" onClick={() => setShowReportModal(true)}>
               <span className="action-icon">📊</span>
               Generate Report
             </Button>
-            <Button variant="action">
+            <Button variant="action" onClick={() => setActiveTab('schedule')}>
               <span className="action-icon">📅</span>
               View Calendar
             </Button>
-            <Button variant="action">
+            <Button variant="action" onClick={() => setShowSettingsModal(true)}>
               <span className="action-icon">⚙️</span>
               Settings
             </Button>
@@ -87,9 +91,18 @@ export function PipelineView({ projects, setProjects, stages }) {
         </Card>
       </div>
       <AddProjectModal
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
         setProjects={setProjects}
+      />
+      <ReportModal
+        isOpen={showReportModal}
+        onClose={() => setShowReportModal(false)}
+        projects={projects}
+      />
+      <SettingsModal
+        isOpen={showSettingsModal}
+        onClose={() => setShowSettingsModal(false)}
       />
     </>
   );
