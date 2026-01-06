@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from '@components/layout/Header';
 import { Navigation } from '@components/layout/Navigation';
 import { PipelineView } from '@components/features/pipeline/PipelineView';
@@ -7,11 +7,22 @@ import { LocalizationView } from '@components/features/localization/Localization
 import { AnalyticsView } from '@components/features/analytics/AnalyticsView';
 import { INITIAL_PROJECTS, PRODUCTION_STAGES } from '@utils/constants';
 import { calculateTotalBudget, getProjectsByStage } from '@utils/helpers';
+import { getProjects, saveProjects, getActiveTab, saveActiveTab } from '@utils/storage';
 import './App.css';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('pipeline');
-  const [projects, setProjects] = useState(INITIAL_PROJECTS);
+  const [activeTab, setActiveTab] = useState(() => getActiveTab('pipeline'));
+  const [projects, setProjects] = useState(() => getProjects(INITIAL_PROJECTS));
+
+  // Persist active tab to localStorage
+  useEffect(() => {
+    saveActiveTab(activeTab);
+  }, [activeTab]);
+
+  // Persist projects to localStorage
+  useEffect(() => {
+    saveProjects(projects);
+  }, [projects]);
 
   const stages = Object.values(PRODUCTION_STAGES);
   const totalBudget = calculateTotalBudget(projects);
