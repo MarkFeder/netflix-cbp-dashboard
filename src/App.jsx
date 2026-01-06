@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { ErrorBoundary } from '@components/common/ErrorBoundary';
+import { SkipLink } from '@components/common/SkipLink';
+import { LiveRegion } from '@components/common/LiveRegion';
 import { Header } from '@components/layout/Header';
 import { Navigation } from '@components/layout/Navigation';
 import { PipelineView } from '@components/features/pipeline/PipelineView';
@@ -14,10 +16,18 @@ import './App.css';
 function App() {
   const [activeTab, setActiveTab] = useState(() => getActiveTab('pipeline'));
   const [projects, setProjects] = useState(() => getProjects(INITIAL_PROJECTS));
+  const [announcement, setAnnouncement] = useState('');
 
-  // Persist active tab to localStorage
+  // Persist active tab to localStorage and announce tab change
   useEffect(() => {
     saveActiveTab(activeTab);
+    const tabNames = {
+      pipeline: 'Pipeline',
+      schedule: 'Schedule',
+      localization: 'Localization',
+      analytics: 'Analytics',
+    };
+    setAnnouncement(`Switched to ${tabNames[activeTab]} view`);
   }, [activeTab]);
 
   // Persist projects to localStorage
@@ -36,13 +46,15 @@ function App() {
 
   return (
     <ErrorBoundary>
+      <SkipLink />
+      <LiveRegion message={announcement} />
       <Header
         totalProjects={projects.length}
         totalBudget={totalBudget}
         activeProjects={activeProjects}
       />
       <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="container">
+      <main id="main-content" className="container" tabIndex="-1">
         <ErrorBoundary>
           {activeTab === 'pipeline' && (
             <PipelineView
@@ -56,7 +68,7 @@ function App() {
           {activeTab === 'localization' && <LocalizationView />}
           {activeTab === 'analytics' && <AnalyticsView projects={projects} />}
         </ErrorBoundary>
-      </div>
+      </main>
     </ErrorBoundary>
   );
 }
