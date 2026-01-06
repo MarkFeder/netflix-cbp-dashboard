@@ -11,8 +11,15 @@ A professional React application built for Netflix's Content & Business Products
 ### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/MarkFeder/netflix-cbp-dashboard.git
+cd netflix-cbp-dashboard
+
 # Install dependencies
 npm install
+
+# Copy environment variables (optional)
+cp .env.example .env
 
 # Start development server
 npm run dev
@@ -25,6 +32,28 @@ npm run preview
 ```
 
 The application will be available at `http://localhost:3000`
+
+### Troubleshooting
+
+**Port already in use:**
+```bash
+# The dev server uses port 3000 by default
+# If port 3000 is occupied, Vite will automatically try the next available port
+```
+
+**Module not found errors:**
+```bash
+# Clear node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Build errors:**
+```bash
+# Clear Vite cache
+rm -rf node_modules/.vite
+npm run dev
+```
 
 ## 📁 Project Structure
 
@@ -196,12 +225,29 @@ import { INITIAL_PROJECTS } from '@utils/constants';
 
 ### Environment Variables
 
-Create a `.env` file in the root directory:
+Create a `.env` file in the root directory (or copy from `.env.example`):
+
+```bash
+cp .env.example .env
+```
+
+Available environment variables:
 
 ```env
+# API Configuration
 VITE_API_URL=http://localhost:3000/api
 VITE_GRAPHQL_URL=http://localhost:3000/graphql
+
+# Feature Flags
+VITE_ENABLE_ANALYTICS=true
+VITE_ENABLE_DEBUG_MODE=false
+
+# Environment
+VITE_APP_ENV=development
+VITE_APP_VERSION=1.0.0
 ```
+
+**Note:** All environment variables must be prefixed with `VITE_` to be exposed to the client-side code.
 
 ### Vite Configuration
 
