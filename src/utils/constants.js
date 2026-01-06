@@ -1,3 +1,7 @@
+// Import mock data from JSON files
+import projectsData from '@/data/projects.json';
+import languagesData from '@/data/languages.json';
+
 export const PRODUCTION_STAGES = {
   PITCH: 'pitch',
   GREENLIGHT: 'greenlight',
@@ -35,10 +39,6 @@ export const LOCALIZATION_STATUSES = {
   COMPLETED: 'completed',
   ON_HOLD: 'on-hold',
 };
-
-// Import mock data from JSON files
-import projectsData from '@/data/projects.json';
-import languagesData from '@/data/languages.json';
 
 export const INITIAL_PROJECTS = projectsData;
 export const INITIAL_LANGUAGES = languagesData;
