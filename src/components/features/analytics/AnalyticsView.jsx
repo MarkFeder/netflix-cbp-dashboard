@@ -104,4 +104,4 @@ export const AnalyticsView = memo(function AnalyticsView({ projects }) {
       </Card>
     </div>
   );
-}
+});
