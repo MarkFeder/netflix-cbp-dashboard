@@ -1,11 +1,12 @@
+import { memo } from 'react';
 import './ProjectCard.css';
 
-export function ProjectCard({ project, onDragStart, onDragEnd }) {
+export const ProjectCard = memo(function ProjectCard({ project, onDragStart, onDragEnd }) {
   return (
     <div
       className="project-card"
       draggable="true"
-      onDragStart={e => onDragStart(e, project)}
+      onDragStart={(e) => onDragStart(e, project)}
       onDragEnd={onDragEnd}
     >
       <div className="project-title">{project.title}</div>
@@ -16,4 +17,4 @@ export function ProjectCard({ project, onDragStart, onDragEnd }) {
       </div>
     </div>
   );
-}
+});

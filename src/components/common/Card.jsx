@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import './Card.css';
 
-export function Card({ title, badge, children, className = '' }) {
+export const Card = memo(function Card({ title, badge, children, className = '' }) {
   return (
     <div className={`card ${className}`}>
       {title && (
@@ -12,4 +13,4 @@ export function Card({ title, badge, children, className = '' }) {
       <div className="card-body">{children}</div>
     </div>
   );
-}
+});

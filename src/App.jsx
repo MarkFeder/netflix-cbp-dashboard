@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { ErrorBoundary } from '@components/common/ErrorBoundary';
 import { Header } from '@components/layout/Header';
 import { Navigation } from '@components/layout/Navigation';
@@ -25,10 +25,14 @@ function App() {
     saveProjects(projects);
   }, [projects]);
 
-  const stages = Object.values(PRODUCTION_STAGES);
-  const totalBudget = calculateTotalBudget(projects);
-  const activeProjects = getProjectsByStage(projects, PRODUCTION_STAGES.PRODUCTION).length +
-    getProjectsByStage(projects, PRODUCTION_STAGES.POST_PRODUCTION).length;
+  const stages = useMemo(() => Object.values(PRODUCTION_STAGES), []);
+  const totalBudget = useMemo(() => calculateTotalBudget(projects), [projects]);
+  const activeProjects = useMemo(
+    () =>
+      getProjectsByStage(projects, PRODUCTION_STAGES.PRODUCTION).length +
+      getProjectsByStage(projects, PRODUCTION_STAGES.POST_PRODUCTION).length,
+    [projects]
+  );
 
   return (
     <ErrorBoundary>

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useMemo, memo } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,24 +16,27 @@ import './AnalyticsView.css';
 // Register ChartJS components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export function AnalyticsView({ projects }) {
-  const budgetByGenre = calculateBudgetByGenre(projects);
-  const stageDistribution = calculateStageDistribution(projects);
+export const AnalyticsView = memo(function AnalyticsView({ projects }) {
+  const budgetByGenre = useMemo(() => calculateBudgetByGenre(projects), [projects]);
+  const stageDistribution = useMemo(() => calculateStageDistribution(projects), [projects]);
 
-  const budgetChartData = {
-    labels: Object.keys(budgetByGenre),
-    datasets: [
-      {
-        label: 'Budget ($M)',
-        data: Object.values(budgetByGenre),
-        backgroundColor: '#E50914',
-        borderColor: '#FFD700',
-        borderWidth: 2,
-      },
-    ],
-  };
+  const budgetChartData = useMemo(
+    () => ({
+      labels: Object.keys(budgetByGenre),
+      datasets: [
+        {
+          label: 'Budget ($M)',
+          data: Object.values(budgetByGenre),
+          backgroundColor: '#E50914',
+          borderColor: '#FFD700',
+          borderWidth: 2,
+        },
+      ],
+    }),
+    [budgetByGenre]
+  );
 
-  const budgetChartOptions = {
+  const budgetChartOptions = useMemo(() => ({
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -72,7 +75,7 @@ export function AnalyticsView({ projects }) {
         },
       },
     },
-  };
+  }), []);
 
   return (
     <div className="dashboard-grid">
