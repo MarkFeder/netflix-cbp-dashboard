@@ -2,6 +2,12 @@
 
 A professional React application built for Netflix's Content & Business Products Engineering team. This dashboard demonstrates enterprise-level UI engineering capabilities including drag-and-drop functionality, data visualization, and responsive design.
 
+## 🎬 Demo
+
+![Application Demo](./assets/demo.gif)
+
+*Interactive content pipeline with drag-and-drop functionality, real-time analytics, and project management.*
+
 ## 🚀 Quick Start
 
 ### Prerequisites
