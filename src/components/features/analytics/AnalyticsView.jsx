@@ -36,46 +36,49 @@ export const AnalyticsView = memo(function AnalyticsView({ projects }) {
     [budgetByGenre]
   );
 
-  const budgetChartOptions = useMemo(() => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        labels: {
-          color: '#ffffff',
-          font: {
-            family: 'IBM Plex Mono',
-            size: 12,
+  const budgetChartOptions = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: {
+            color: '#ffffff',
+            font: {
+              family: 'IBM Plex Mono',
+              size: 12,
+            },
           },
         },
       },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          color: '#b3b3b3',
-          font: {
-            family: 'IBM Plex Mono',
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: '#b3b3b3',
+            font: {
+              family: 'IBM Plex Mono',
+            },
+          },
+          grid: {
+            color: 'rgba(229, 9, 20, 0.1)',
           },
         },
-        grid: {
-          color: 'rgba(229, 9, 20, 0.1)',
-        },
-      },
-      x: {
-        ticks: {
-          color: '#b3b3b3',
-          font: {
-            family: 'IBM Plex Mono',
+        x: {
+          ticks: {
+            color: '#b3b3b3',
+            font: {
+              family: 'IBM Plex Mono',
+            },
+          },
+          grid: {
+            color: 'rgba(229, 9, 20, 0.1)',
           },
         },
-        grid: {
-          color: 'rgba(229, 9, 20, 0.1)',
-        },
       },
-    },
-  }), []);
+    }),
+    []
+  );
 
   return (
     <div className="dashboard-grid">

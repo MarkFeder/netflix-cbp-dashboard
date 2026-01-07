@@ -30,7 +30,7 @@ export const projectSchema = z.object({
     .string()
     .min(1, 'Release date is required')
     .refine(
-      (date) => {
+      date => {
         const selectedDate = new Date(date);
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -45,6 +45,6 @@ export const projectSchema = z.object({
 });
 
 /**
- * Type for project form data
+ * Type for project form data (inferred from schema)
+ * Usage: const data = projectSchema.parse(formData);
  */
-export type ProjectFormData = z.infer<typeof projectSchema>;

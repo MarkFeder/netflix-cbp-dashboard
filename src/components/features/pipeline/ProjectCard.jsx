@@ -6,7 +6,7 @@ export const ProjectCard = memo(function ProjectCard({ project, onDragStart, onD
     <div
       className="project-card"
       draggable="true"
-      onDragStart={(e) => onDragStart(e, project)}
+      onDragStart={e => onDragStart(e, project)}
       onDragEnd={onDragEnd}
     >
       <div className="project-title">{project.title}</div>

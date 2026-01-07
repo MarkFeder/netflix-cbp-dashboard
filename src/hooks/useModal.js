@@ -17,12 +17,12 @@ export const useModal = (initialState = false) => {
   }, []);
 
   const toggle = useCallback(() => {
-    setIsOpen((prev) => !prev);
+    setIsOpen(prev => !prev);
   }, []);
 
   // Handle escape key to close modal
   useEffect(() => {
-    const handleEscape = (event) => {
+    const handleEscape = event => {
       if (event.key === 'Escape' && isOpen) {
         close();
       }

@@ -14,9 +14,7 @@ export function LocalizationView() {
                 <div className="progress-fill" style={{ width: `${lang.progress}%` }} />
               </div>
             </div>
-            <div className={`status-badge ${lang.status}`}>
-              {lang.status.replace('-', ' ')}
-            </div>
+            <div className={`status-badge ${lang.status}`}>{lang.status.replace('-', ' ')}</div>
           </div>
         ))}
       </div>

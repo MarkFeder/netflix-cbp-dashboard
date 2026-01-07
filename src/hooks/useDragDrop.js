@@ -8,7 +8,7 @@ export const useDragDrop = () => {
   const [draggedItem, setDraggedItem] = useState(null);
   const [dragOverTarget, setDragOverTarget] = useState(null);
 
-  const handleDragStart = useCallback((item) => {
+  const handleDragStart = useCallback(item => {
     setDraggedItem(item);
   }, []);
 
@@ -40,11 +40,11 @@ export const useDragDrop = () => {
     [draggedItem]
   );
 
-  const isDragging = (item) => {
+  const isDragging = item => {
     return draggedItem?.id === item?.id;
   };
 
-  const isDropTarget = (target) => {
+  const isDropTarget = target => {
     return dragOverTarget === target;
   };
 

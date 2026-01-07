@@ -26,13 +26,13 @@ export function AddProjectModal({ isOpen, onClose, setProjects }) {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     const newProject = {
       id: generateId(),
       ...data,
       budget: `$${data.budget}M`,
     };
-    setProjects((prev) => [...prev, newProject]);
+    setProjects(prev => [...prev, newProject]);
     reset();
     onClose();
   };
@@ -63,7 +63,7 @@ export function AddProjectModal({ isOpen, onClose, setProjects }) {
             className={`form-select ${errors.genre ? 'form-input--error' : ''}`}
             {...register('genre')}
           >
-            {GENRES.map((genre) => (
+            {GENRES.map(genre => (
               <option key={genre} value={genre}>
                 {genre}
               </option>
@@ -95,7 +95,7 @@ export function AddProjectModal({ isOpen, onClose, setProjects }) {
             className={`form-select ${errors.priority ? 'form-input--error' : ''}`}
             {...register('priority')}
           >
-            {PRIORITY_LEVELS.map((level) => (
+            {PRIORITY_LEVELS.map(level => (
               <option key={level} value={level}>
                 {level}
               </option>

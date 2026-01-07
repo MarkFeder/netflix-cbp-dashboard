@@ -4,7 +4,11 @@
       "Bash(git add:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\nExtract mock data to separate JSON files\n\n- Create src/data directory with projects.json and languages.json\n- Move INITIAL_PROJECTS and INITIAL_LANGUAGES to JSON files for easier data management\n- Update constants.js to import from JSON files\n- Add @data alias to Vite config for clean imports\n- Improves data separation and makes mock data easier to modify\nEOF\n)\")",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(test:*)",
+      "Bash(npm run format:*)"
     ]
   }
 }

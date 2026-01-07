@@ -5,7 +5,9 @@ import './SettingsModal.css';
 
 export function SettingsModal({ isOpen, onClose }) {
   const handleClearData = () => {
-    if (window.confirm('Are you sure you want to clear all local data? This action cannot be undone.')) {
+    if (
+      window.confirm('Are you sure you want to clear all local data? This action cannot be undone.')
+    ) {
       clearAllStorage();
       window.location.reload();
     }
@@ -25,7 +27,9 @@ export function SettingsModal({ isOpen, onClose }) {
         <section className="settings-section">
           <h3>About</h3>
           <div className="about-info">
-            <p><strong>Netflix CBP Dashboard</strong></p>
+            <p>
+              <strong>Netflix CBP Dashboard</strong>
+            </p>
             <p>Version 1.0.0</p>
             <p>Content-Based Personalization Pipeline Management</p>
           </div>

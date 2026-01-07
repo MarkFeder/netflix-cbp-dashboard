@@ -5,7 +5,7 @@ import DOMPurify from 'dompurify';
  * @param {string} dirty - Unsafe HTML string
  * @returns {string} Sanitized HTML string
  */
-export const sanitizeHTML = (dirty) => {
+export const sanitizeHTML = dirty => {
   return DOMPurify.sanitize(dirty, {
     ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a', 'p', 'br'],
     ALLOWED_ATTR: ['href', 'title'],
@@ -17,7 +17,7 @@ export const sanitizeHTML = (dirty) => {
  * @param {string} input - User input string
  * @returns {string} Sanitized string
  */
-export const sanitizeText = (input) => {
+export const sanitizeText = input => {
   if (typeof input !== 'string') {
     return '';
   }
@@ -26,9 +26,7 @@ export const sanitizeText = (input) => {
   const stripped = input.replace(/<[^>]*>/g, '');
 
   // Remove potentially dangerous characters
-  const sanitized = stripped
-    .replace(/[<>]/g, '')
-    .trim();
+  const sanitized = stripped.replace(/[<>]/g, '').trim();
 
   return sanitized;
 };
@@ -42,7 +40,7 @@ export const sanitizeText = (input) => {
 export const sanitizeObject = (obj, fields) => {
   const sanitized = { ...obj };
 
-  fields.forEach((field) => {
+  fields.forEach(field => {
     if (typeof sanitized[field] === 'string') {
       sanitized[field] = sanitizeText(sanitized[field]);
     }
@@ -56,7 +54,7 @@ export const sanitizeObject = (obj, fields) => {
  * @param {string} url - URL to validate
  * @returns {string|null} Sanitized URL or null if invalid
  */
-export const sanitizeURL = (url) => {
+export const sanitizeURL = url => {
   try {
     const parsed = new URL(url);
     // Only allow http and https protocols
@@ -74,7 +72,7 @@ export const sanitizeURL = (url) => {
  * @param {string} str - String to escape
  * @returns {string} Escaped string
  */
-export const escapeHTML = (str) => {
+export const escapeHTML = str => {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;

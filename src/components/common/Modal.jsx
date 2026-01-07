@@ -27,11 +27,7 @@ export function Modal({ isOpen, onClose, title, children }) {
       <div className="modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true">
         <div className="modal-header">
           <span>{title}</span>
-          <button
-            className="modal-close"
-            onClick={onClose}
-            aria-label="Close modal"
-          >
+          <button className="modal-close" onClick={onClose} aria-label="Close modal">
             ×
           </button>
         </div>

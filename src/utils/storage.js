@@ -44,7 +44,7 @@ export const setToStorage = (key, value) => {
  * Remove item from localStorage
  * @param {string} key - Storage key
  */
-export const removeFromStorage = (key) => {
+export const removeFromStorage = key => {
   try {
     window.localStorage.removeItem(key);
   } catch (error) {
@@ -57,7 +57,7 @@ export const removeFromStorage = (key) => {
  */
 export const clearAllStorage = () => {
   try {
-    Object.values(STORAGE_KEYS).forEach((key) => {
+    Object.values(STORAGE_KEYS).forEach(key => {
       window.localStorage.removeItem(key);
     });
   } catch (error) {
@@ -66,21 +66,18 @@ export const clearAllStorage = () => {
 };
 
 // Project-specific storage functions
-export const getProjects = (defaultValue) =>
-  getFromStorage(STORAGE_KEYS.PROJECTS, defaultValue);
+export const getProjects = defaultValue => getFromStorage(STORAGE_KEYS.PROJECTS, defaultValue);
 
-export const saveProjects = (projects) => setToStorage(STORAGE_KEYS.PROJECTS, projects);
+export const saveProjects = projects => setToStorage(STORAGE_KEYS.PROJECTS, projects);
 
 // Language-specific storage functions
-export const getLanguages = (defaultValue) =>
-  getFromStorage(STORAGE_KEYS.LANGUAGES, defaultValue);
+export const getLanguages = defaultValue => getFromStorage(STORAGE_KEYS.LANGUAGES, defaultValue);
 
-export const saveLanguages = (languages) => setToStorage(STORAGE_KEYS.LANGUAGES, languages);
+export const saveLanguages = languages => setToStorage(STORAGE_KEYS.LANGUAGES, languages);
 
 // Active tab storage functions
-export const getActiveTab = (defaultValue) =>
-  getFromStorage(STORAGE_KEYS.ACTIVE_TAB, defaultValue);
+export const getActiveTab = defaultValue => getFromStorage(STORAGE_KEYS.ACTIVE_TAB, defaultValue);
 
-export const saveActiveTab = (tab) => setToStorage(STORAGE_KEYS.ACTIVE_TAB, tab);
+export const saveActiveTab = tab => setToStorage(STORAGE_KEYS.ACTIVE_TAB, tab);
 
 export { STORAGE_KEYS };

@@ -7,13 +7,22 @@
  * @param {Array} projects - Array of project objects
  * @returns {string} CSV formatted string
  */
-export const exportToCSV = (projects) => {
+export const exportToCSV = projects => {
   if (!projects || projects.length === 0) {
     return '';
   }
 
-  const headers = ['ID', 'Title', 'Genre', 'Budget', 'Priority', 'Stage', 'Release Date', 'Progress'];
-  const rows = projects.map((project) => [
+  const headers = [
+    'ID',
+    'Title',
+    'Genre',
+    'Budget',
+    'Priority',
+    'Stage',
+    'Release Date',
+    'Progress',
+  ];
+  const rows = projects.map(project => [
     project.id,
     `"${project.title}"`,
     project.genre,
@@ -24,10 +33,7 @@ export const exportToCSV = (projects) => {
     project.progress,
   ]);
 
-  const csvContent = [
-    headers.join(','),
-    ...rows.map((row) => row.join(',')),
-  ].join('\n');
+  const csvContent = [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
 
   return csvContent;
 };
@@ -54,7 +60,7 @@ export const downloadFile = (content, filename, mimeType = 'text/plain') => {
  * Export projects as CSV file
  * @param {Array} projects - Array of project objects
  */
-export const exportProjectsAsCSV = (projects) => {
+export const exportProjectsAsCSV = projects => {
   const csvContent = exportToCSV(projects);
   const timestamp = new Date().toISOString().split('T')[0];
   downloadFile(csvContent, `netflix-projects-${timestamp}.csv`, 'text/csv');
@@ -64,7 +70,7 @@ export const exportProjectsAsCSV = (projects) => {
  * Export projects as JSON file
  * @param {Array} projects - Array of project objects
  */
-export const exportProjectsAsJSON = (projects) => {
+export const exportProjectsAsJSON = projects => {
   const jsonContent = JSON.stringify(projects, null, 2);
   const timestamp = new Date().toISOString().split('T')[0];
   downloadFile(jsonContent, `netflix-projects-${timestamp}.json`, 'application/json');

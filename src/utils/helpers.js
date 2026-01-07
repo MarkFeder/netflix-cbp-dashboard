@@ -5,7 +5,7 @@ import { format, parseISO } from 'date-fns';
  * @param {string} dateString - ISO date string
  * @returns {string} Formatted date
  */
-export const formatDate = (dateString) => {
+export const formatDate = dateString => {
   try {
     return format(parseISO(dateString), 'MMM dd, yyyy');
   } catch (error) {
@@ -19,7 +19,7 @@ export const formatDate = (dateString) => {
  * @param {Array} projects - Array of project objects
  * @returns {number} Total budget in millions
  */
-export const calculateTotalBudget = (projects) => {
+export const calculateTotalBudget = projects => {
   return projects.reduce((sum, project) => {
     const budget = parseInt(project.budget.replace(/[$M]/g, ''), 10);
     return sum + (isNaN(budget) ? 0 : budget);
@@ -72,7 +72,7 @@ export const groupProjectsBy = (projects, property) => {
  * @param {Array} projects - Array of project objects
  * @returns {Object} Stage distribution
  */
-export const calculateStageDistribution = (projects) => {
+export const calculateStageDistribution = projects => {
   return projects.reduce((acc, project) => {
     acc[project.stage] = (acc[project.stage] || 0) + 1;
     return acc;
@@ -84,7 +84,7 @@ export const calculateStageDistribution = (projects) => {
  * @param {Array} projects - Array of project objects
  * @returns {Object} Budget distribution by genre
  */
-export const calculateBudgetByGenre = (projects) => {
+export const calculateBudgetByGenre = projects => {
   return projects.reduce((acc, project) => {
     const budget = parseInt(project.budget.replace(/[$M]/g, ''), 10);
     acc[project.genre] = (acc[project.genre] || 0) + (isNaN(budget) ? 0 : budget);
@@ -106,8 +106,5 @@ export const generateId = () => {
  * @returns {string} Combined class names
  */
 export const cn = (...classes) => {
-  return classes
-    .flat()
-    .filter(Boolean)
-    .join(' ');
+  return classes.flat().filter(Boolean).join(' ');
 };

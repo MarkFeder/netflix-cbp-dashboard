@@ -100,10 +100,7 @@ export function PipelineView({ projects, setProjects, stages, setActiveTab }) {
         onClose={() => setShowReportModal(false)}
         projects={projects}
       />
-      <SettingsModal
-        isOpen={showSettingsModal}
-        onClose={() => setShowSettingsModal(false)}
-      />
+      <SettingsModal isOpen={showSettingsModal} onClose={() => setShowSettingsModal(false)} />
     </>
   );
 }
