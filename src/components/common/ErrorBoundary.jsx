@@ -1,8 +1,95 @@
 import { Component } from 'react';
 import './ErrorBoundary.css';
 
+const ERROR_MESSAGES = {
+  title: 'Oops! Something went wrong',
+  description: "We're sorry for the inconvenience. The application encountered an unexpected error.",
+  detailsTitle: 'Error Details (Development Only)',
+  tryAgainButton: 'Try Again',
+  reloadButton: 'Reload Page',
+};
+
 /**
- * Error Boundary component to catch and handle React errors
+ * ErrorDetails - Shows technical error information in development mode
+ */
+function ErrorDetails({ error, errorInfo }) {
+  if (!import.meta.env.DEV || !error) {
+    return null;
+  }
+
+  const errorStack = error.toString();
+  const componentStack = errorInfo?.componentStack || '';
+
+  return (
+    <details className="error-boundary__details">
+      <summary>{ERROR_MESSAGES.detailsTitle}</summary>
+      <pre className="error-boundary__error">
+        {errorStack}
+        {componentStack}
+      </pre>
+    </details>
+  );
+}
+
+/**
+ * ErrorActions - Recovery action buttons
+ */
+function ErrorActions({ onReset }) {
+  const handleReload = () => window.location.reload();
+
+  return (
+    <div className="error-boundary__actions">
+      <button onClick={onReset} className="error-boundary__button">
+        {ERROR_MESSAGES.tryAgainButton}
+      </button>
+      <button onClick={handleReload} className="error-boundary__button error-boundary__button--secondary">
+        {ERROR_MESSAGES.reloadButton}
+      </button>
+    </div>
+  );
+}
+
+/**
+ * ErrorFallback - UI displayed when an error is caught
+ */
+function ErrorFallback({ error, errorInfo, onReset }) {
+  return (
+    <div className="error-boundary">
+      <div className="error-boundary__container">
+        <div className="error-boundary__icon">⚠️</div>
+        <h1 className="error-boundary__title">{ERROR_MESSAGES.title}</h1>
+        <p className="error-boundary__message">{ERROR_MESSAGES.description}</p>
+
+        <ErrorDetails error={error} errorInfo={errorInfo} />
+        <ErrorActions onReset={onReset} />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Logs error to console and external error tracking service
+ */
+function logError(error, errorInfo) {
+  console.error('Error caught by ErrorBoundary:', error, errorInfo);
+
+  // Send to error reporting service in production (e.g., Sentry, LogRocket)
+  if (import.meta.env.PROD) {
+    // Example: Sentry.captureException(error, { extra: errorInfo });
+  }
+}
+
+/**
+ * ErrorBoundary - Catches React errors and displays a fallback UI
+ *
+ * Wraps child components to prevent the entire app from crashing when
+ * a component throws an error. Shows user-friendly error message with
+ * recovery options.
+ *
+ * Usage:
+ *   <ErrorBoundary>
+ *     <YourComponent />
+ *   </ErrorBoundary>
  */
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -14,25 +101,20 @@ class ErrorBoundary extends Component {
     };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('Error caught by ErrorBoundary:', error, errorInfo);
+    logError(error, errorInfo);
 
     this.setState({
       error,
       errorInfo,
     });
-
-    // Log to error reporting service (e.g., Sentry) in production
-    if (import.meta.env.PROD) {
-      // Example: Sentry.captureException(error, { extra: errorInfo });
-    }
   }
 
-  handleReset = () => {
+  resetErrorBoundary = () => {
     this.setState({
       hasError: false,
       error: null,
@@ -41,43 +123,14 @@ class ErrorBoundary extends Component {
   };
 
   render() {
-    if (this.state.hasError) {
-      return (
-        <div className="error-boundary">
-          <div className="error-boundary__container">
-            <div className="error-boundary__icon">⚠️</div>
-            <h1 className="error-boundary__title">Oops! Something went wrong</h1>
-            <p className="error-boundary__message">
-              We're sorry for the inconvenience. The application encountered an unexpected error.
-            </p>
+    const { hasError, error, errorInfo } = this.state;
+    const { children } = this.props;
 
-            {import.meta.env.DEV && this.state.error && (
-              <details className="error-boundary__details">
-                <summary>Error Details (Development Only)</summary>
-                <pre className="error-boundary__error">
-                  {this.state.error.toString()}
-                  {this.state.errorInfo?.componentStack}
-                </pre>
-              </details>
-            )}
-
-            <div className="error-boundary__actions">
-              <button onClick={this.handleReset} className="error-boundary__button">
-                Try Again
-              </button>
-              <button
-                onClick={() => window.location.reload()}
-                className="error-boundary__button error-boundary__button--secondary"
-              >
-                Reload Page
-              </button>
-            </div>
-          </div>
-        </div>
-      );
+    if (hasError) {
+      return <ErrorFallback error={error} errorInfo={errorInfo} onReset={this.resetErrorBoundary} />;
     }
 
-    return this.props.children;
+    return children;
   }
 }
 
